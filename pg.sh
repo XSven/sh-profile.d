@@ -5,4 +5,4 @@ export PGSERVICEFILE
 
 mkdir -p "$(dirname "${PGSERVICEFILE}")"
 
-export PGSEVICENAME=localpostgres
+export PGSERVICE=localpostgres

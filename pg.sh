@@ -12,4 +12,3 @@ if [ -s "${PGSERVICEFILE}" ]; then
 else
   unset PGSERVICEFILE
 fi
-

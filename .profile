@@ -15,6 +15,14 @@ if command_exists most; then
   . ~/profile.d/most-init-user.sh
 fi
 
+if command_exists gpg; then
+  . ~/profile.d/gpg.sh
+fi
+
+if command_exists pass; then
+  . ~/profile.d/pass.sh
+fi
+
 if [ "$(get_os_name)" = aix ]; then
   # /usr/lib/rpm/rpmdeps invalid range expression
   # https://community.ibm.com/community/user/power/discussion/usrlibrpmrpmdeps-invalid-range-expression

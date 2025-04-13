@@ -17,10 +17,9 @@ fi
 
 if command_exists gpg; then
   . ~/profile.d/gpg.sh
-fi
-
-if command_exists pass; then
-  . ~/profile.d/pass.sh
+  if command_exists pass; then
+    . ~/profile.d/pass.sh
+  fi
 fi
 
 if [ "$(get_os_name)" = aix ]; then

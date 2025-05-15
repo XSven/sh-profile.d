@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 
+# example: push_image_to_registry harbor.emea.ocp.int.kn cp-666093 rest-manager:1.0.0
+
 push_image_to_registry () (
   func_name=push_image_to_registry
 
+  #set -o xtrace
   set -o nounset
 
   while getopts :h option; do
@@ -15,8 +18,6 @@ push_image_to_registry () (
      esac
   done
   shift $(( OPTIND - 1 ))
-
-  # example: push_image_to_registry harbor.emea.ocp.int.kn cp-666093 rest-manager:1.0.0
 
   registry=$1
   namespace=$2

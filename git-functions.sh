@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 
+# example: github_archive -x -t profile.d XSven sh-profile.d master
+
 github_archive() (
   func_name=github_archive
 
+  #set -o xtrace
   set -o nounset
 
   extract=false
@@ -25,7 +28,7 @@ github_archive() (
     return 2
   fi
   owner=$1
-  repository=$2
+  repository=${2%.git}
   treeIsh=$3
 
   api_endpoint=https://api.github.com/repos/${owner}/${repository}/tarball/${treeIsh}

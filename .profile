@@ -65,6 +65,10 @@ if command_exists psql; then
   . ~/profile.d/pg.sh
 fi
 
+if command_exists podman; then
+  . ~/profile.d/podman.sh
+fi
+
 . ~/profile.d/nexus.sh
 . ~/profile.d/openapi.sh
 

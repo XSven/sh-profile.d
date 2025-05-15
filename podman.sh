@@ -21,7 +21,7 @@ push_image_to_registry () (
 
   registry=$1
   namespace=$2
-  image=${1##*/}
+  image=${3##*/}
 
   if ! podman login --get-login "${registry}" 1>/dev/null 2>&1; then
     username=$(vault read --field user "processing/harbor/prod/${registry}/${namespace}/robot_accounts/ibpp-harbor")

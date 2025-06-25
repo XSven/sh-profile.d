@@ -29,6 +29,7 @@ git config --global alias.lg "log --pretty=format:'%h - %ci %d %s (%an <%ae>)' -
 git config --global alias.lgg '!git lg --color --graph'
 git config --global alias.lgh '!git lg -10'
 git config --global alias.ls 'ls-tree -r --name-only'
+git config --global alias.sp 'stash push --include-untracked'
 git config --global alias.st status
 git config --global alias.stn 'status --untracked-files=no'
 git config --global alias.stash-unapply '!git stash show --patch | git apply --reverse'

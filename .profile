@@ -22,15 +22,15 @@ if command_exists gpg; then
   fi
 fi
 
-if [ "$(get_os_name)" = aix ]; then
-  # /usr/lib/rpm/rpmdeps invalid range expression
-  # https://community.ibm.com/community/user/power/discussion/usrlibrpmrpmdeps-invalid-range-expression
-  # legacy locale
-  LANG=EN_US.UTF-8
-else
-  # CLDR sourced locale
-  LANG=en_US.UTF-8
-fi
+#if [ "$(get_os_name)" = aix ]; then
+#  # /usr/lib/rpm/rpmdeps invalid range expression
+#  # https://community.ibm.com/community/user/power/discussion/usrlibrpmrpmdeps-invalid-range-expression
+#  # legacy locale
+#  LANG=EN_US.UTF-8 # has issues when building rpms
+#else
+#  # CLDR sourced locale
+#  LANG=en_US.UTF-8
+#fi
 
 # /etc/environment
 # PATH=/usr/bin:/etc:/usr/sbin:/usr/local/bin:/opt/freeware/bin:/opt/freeware/sbin:/usr/ucb:/usr/bin/X11:/sbin

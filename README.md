@@ -1,25 +1,26 @@
 ## Description
 
-This repository contains a collection of login initialization files. Each file is
-a POSIX compliant shell script that was verified with the [ShellCheck](https://www.shellcheck.net)
-linter. Together they build the login process.
+This repository contains a collection of login initialization files. Each
+file is a POSIX compliant shell script that was verified with the
+[ShellCheck](https://www.shellcheck.net) linter. Together they build the
+login process.
 
 ## Preparation
 
-Make sure that a required proxy configuration (`http_proxy`, `https_proxy`, and
-`no_proxy`) is done in either the _/etc/environment_ (AIX) or the
+Make sure that a required proxy configuration (`http_proxy`, `https_proxy`,
+and `no_proxy`) is done in either the _/etc/environment_ (AIX) or the
 _/etc/profile.d/http\_proxy.sh_ (WSL with CentOS or Ubuntu) file.
 
 The login process uses the FULL_NAME and EMAIL environment variables.
-It extracts your full name (space separated first name and last name) from the
-1st and your email address from the 5th GECOS field. Execute `chfn` to verify
-and adjust your GECOS information.
+It extracts your full name (space separated first name and last name) from
+the 1st and your email address from the 5th GECOS field. Execute `chfn`
+to verify and adjust your GECOS information.
 
-We expect that the login process works for the **ksh93** and the **bash** login
-shell. Both shells load _~/.profile_. If your shell is **bash** and if the file
-_~/.bash_profile_ exists, this file takes precedence over _~/.profile_ and the
-login process would not run. Execute `chsh` to verify and adjust your shell.
-The recommended shell is **ksh93**.
+We expect that the login process works for the **ksh93** and the **bash**
+login shell. Both shells load _~/.profile_. If your shell is **bash**
+and if the file _~/.bash_profile_ exists, this file takes precedence over
+_~/.profile_ and the login process would not run. Execute `chsh` to verify
+and adjust your shell.  The recommended shell is **ksh93**.
 
 ## Installing profile.d
 
@@ -56,19 +57,16 @@ This _~/customizations.sh_ example file
 
 # Change command-line editing mode from vi (the default) to emacs
 set -o emacs
-
-alias installdeps='cpm install --no-test --with-configure --with-develop --local-lib-contained local --show-build-log-on-failure'
 ```
 
-changes the command-line editing mode and provides a `cpm` based alias to
-conveniently install perl dependencies.
+changes the command-line editing mode.
 
 ## Some words about perlbrew and local::lib
 
 To benefit from the [perlbrew](https://metacpan.org/pod/perlbrew) perl
-environment manager your login shell has to be **bash**. If your default shell
-is not **bash**, call the `use_bash` function to switch to **bash** in your
-current session. Call `exit` to return to your default shell.
+environment manager your login shell has to be **bash**. If your default
+shell is not **bash**, call the `use_bash` function to switch to **bash**
+in your current session. Call `exit` to return to your default shell.
 
 Because the [local::lib](https://metacpan.org/pod/local::lib) module will be
 automatically installed once, you can use the `perlll` function to install perl

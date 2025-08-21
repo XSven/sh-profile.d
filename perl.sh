@@ -39,14 +39,16 @@ perlll() {
   fi
   # shellcheck disable=SC2086
   case $1 in
-         --* ) OLD_IFS="${IFS}"; IFS=,; set -- $1; IFS="${OLD_IFS}"; unset OLD_IFS
-               case $2 in
+      --* ) OLD_IFS="${IFS}"; IFS=,; set -- $1; IFS="${OLD_IFS}"; unset OLD_IFS
+            case $2 in
                  /* ) set -- "$1,$2";;
+              local ) set -- "$1,${PWD}/$2";; # cpm's default --local-lib-contained DIR
                   * ) set -- "$1,${PERL_LOCAL_LIBS_DIR}/$2";;
-               esac;;
-          /* ) true;;
-          '' ) return;;
-           * ) set -- "${PERL_LOCAL_LIBS_DIR}/$1";;
+            esac;;
+       /* ) true;;
+    local ) set -- "${PWD}/$1";; # cpm's default --local-lib-contained DIR
+       '' ) return;;
+        * ) set -- "${PERL_LOCAL_LIBS_DIR}/$1";;
   esac
   eval "$(eval perl -I\""${PERL_LOCAL_LIBS_DIR}/local-lib/lib/perl5"\" -Mlocal::lib=\""$1"\")"
 }

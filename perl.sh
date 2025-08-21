@@ -53,6 +53,8 @@ perlll() {
   eval "$(eval perl -I\""${PERL_LOCAL_LIBS_DIR}/local-lib/lib/perl5"\" -Mlocal::lib=\""$1"\")"
 }
 
+alias installdeps='cpm install --no-test --with-configure --with-develop --local-lib-contained ${PERL_LOCAL_LIB_ROOT:-local} --show-build-log-on-failure'
+
 perlrun() (
   func_name=perlrun
   optind_correction=1

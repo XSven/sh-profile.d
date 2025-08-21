@@ -53,12 +53,6 @@ perlll() {
   eval "$(eval perl -I\""${PERL_LOCAL_LIBS_DIR}/local-lib/lib/perl5"\" -Mlocal::lib=\""$1"\")"
 }
 
-# Try to install cpanm
-# Prepend ~/bin to the PATH to add additional utilities like for example GNU tar
-perlll local-lib
-make -f ~/profile.d/Makefile PATH="${HOME}/bin:${PATH}" PERL_LOCAL_LIBS_DIR="${PERL_LOCAL_LIBS_DIR}" install-cpanm
-perlll --deactivate,local-lib
-
 perlrun() (
   func_name=perlrun
   optind_correction=1

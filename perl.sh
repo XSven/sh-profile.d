@@ -54,7 +54,7 @@ perlll() {
 }
 
 installdeps() {
-  if [ -n "${PERL_MM_OPT}" ]; then
+  if test -n "${PERL_MM_OPT}" -a "${PERL_MM_OPT##*/}" = local; then
     cpm install --no-test --with-configure --with-develop --local-lib-contained "${PERL_MM_OPT#*=}" --show-build-log-on-failure
   else
     cpm install --no-test --with-configure --with-develop --local-lib-contained local --show-build-log-on-failure

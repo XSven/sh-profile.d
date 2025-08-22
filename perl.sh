@@ -46,14 +46,20 @@ perlll() {
                   * ) set -- "$1,${PERL_LOCAL_LIBS_DIR}/$2";;
             esac;;
        /* ) true;;
-    local ) set -- "${PWD}/$1";; # cpm's default --local-lib-contained DIR
+    local ) set -- "--no-create,${PWD}/$1";; # cpm's default --local-lib-contained DIR
        '' ) return;;
         * ) set -- "${PERL_LOCAL_LIBS_DIR}/$1";;
   esac
   eval "$(eval perl -I\""${PERL_LOCAL_LIBS_DIR}/local-lib/lib/perl5"\" -Mlocal::lib=\""$1"\")"
 }
 
-alias installdeps='cpm install --no-test --with-configure --with-develop --local-lib-contained ${PERL_LOCAL_LIB_ROOT:-local} --show-build-log-on-failure'
+installdeps() {
+  if [ -n "${PERL_MM_OPT}" ]; then
+    cpm install --no-test --with-configure --with-develop --local-lib-contained "${PERL_MM_OPT#*=}" --show-build-log-on-failure
+  else
+    cpm install --no-test --with-configure --with-develop --local-lib-contained local --show-build-log-on-failure
+  fi
+}
 
 perlrun() (
   func_name=perlrun

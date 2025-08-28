@@ -70,7 +70,6 @@ if command_exists podman; then
 fi
 
 . ~/profile.d/nexus.sh
-. ~/profile.d/openapi.sh
 
 if [ -f ~/customizations.sh ]; then
   . ~/customizations.sh

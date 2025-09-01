@@ -54,10 +54,15 @@ perlll() {
 }
 
 installdeps() {
+  # defaults:
+  #          --no-test
+  #   phase: --with-build, --with-runtime, --with-test
+  #   types: --with-requires
+  # TODO: don't install "develop" phase dependencies
   if test -n "${PERL_MM_OPT}" -a "${PERL_MM_OPT##*/}" = local; then
-    cpm install --no-test --with-configure --with-develop --local-lib-contained "${PERL_MM_OPT#*=}" --show-build-log-on-failure
+    cpm install --with-configure --with-develop --local-lib-contained "${PERL_MM_OPT#*=}" --show-build-log-on-failure
   else
-    cpm install --no-test --with-configure --with-develop --local-lib-contained local --show-build-log-on-failure
+    cpm install --with-configure --with-develop --local-lib-contained local --show-build-log-on-failure
   fi
 }
 

@@ -66,6 +66,8 @@ installdeps() {
   fi
 }
 
+alias tidy='perltidy cpanfile Makefile.PL $(find lib t/lib -name "*.pm" 2>/dev/null) $(find t -name "*.t")'
+
 perlrun() (
   func_name=perlrun
   optind_correction=1

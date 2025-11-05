@@ -67,7 +67,7 @@ installdeps() {
   fi
 }
 
-alias tidy='perltidy cpanfile Makefile.PL $(find lib t/lib -name "*.pm" 2>/dev/null) $(find t -name "*.t")'
+alias tidy='perltidy cpanfile Makefile.PL $(find lib t/lib -name "*.pm" 2>/dev/null) $(find bin script -type f 2>/dev/null) $(find t -name "*.t")'
 
 perlrun() (
   func_name=perlrun

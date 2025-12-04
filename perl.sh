@@ -163,6 +163,16 @@ perldp() {
   perlrun "$@" -- -MO=-qq,Deparse,-P,-p,-q,-sC -e
 }
 
+# Print ExtUtils::MakeMaker configuration attributes (Makefile.PL has to be a
+# modulino!)
+perlmma() {
+  perlrun -L "$@" -- -Mstrict -Mwarnings -M'Data::Dumper qw( Dumper )' -e '
+    $Data::Dumper::Indent = 1;
+    $Data::Dumper::Terse = 1;
+    print STDOUT Dumper( $ARGV[ 0 ] ? ( require "./Makefile.PL" )->{ $ARGV[ 0 ] } : ( require "./Makefile.PL" ) )
+  ' --
+}
+
 perlmodver() {
   perlrun "$@" -- -e '
     BEGIN { require v5.10.0; }

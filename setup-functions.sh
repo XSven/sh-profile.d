@@ -146,14 +146,22 @@ select_loop() (
   unset item
 
   # select loop
+  # End Of Transmission (EOT, ^D) breaks the loop because the read()
+  # exit status is >0 in this case
   while { printf %s "${PS3:-#? }" 1>&2; read -r REPLY; exit_status=$?; [ ${exit_status} -eq 0 ]; }; do
+    case ${REPLY} in
+      '' | 0* | *[!0-9]* ) continue;;
+    esac
     if [ "${REPLY}" -ge 1 ] && [ "${REPLY}" -le $# ]; then
+      # indirect expansion of positional parameters
+      # https://unix.stackexchange.com/questions/111618/indirect-variable-expansion-in-posix-as-done-in-bash
+      # shellcheck disable=SC2086
       eval item=\$\{${REPLY}\}
       break
     fi
   done
   if [ ${exit_status} -eq 0 ]; then
-    printf '%s\n' "${item}"
+    printf %s\\n "${item}"
   else
     return ${exit_status}
   fi

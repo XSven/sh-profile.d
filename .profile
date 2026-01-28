@@ -75,7 +75,8 @@ if [ -f ~/customizations.sh ]; then
   . ~/customizations.sh
 fi
 
-mkdir -p ~/bin
-PATH=~/bin:${PATH}
+# https://specifications.freedesktop.org/basedir-spec/latest/
+mkdir -p ~/.local/bin
+PATH=~/.local/bin:${PATH}
 
 PATH=$(clean_path "${PATH}")

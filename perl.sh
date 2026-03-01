@@ -34,8 +34,8 @@ make -f ~/profile.d/Makefile PERL_LOCAL_LIBS_DIR="${PERL_LOCAL_LIBS_DIR}" instal
 # Convenience function to prepare a given ($1) local::lib environment
 perlll() {
   if [ $# -eq 0 ]; then
-    # shellcheck disable=SC2046
-    set -- "$(cd "${PERL_LOCAL_LIBS_DIR}" || exit; select_loop $(ls -1d -- *))"
+    # shellcheck disable=SC2046,SC2010
+    set -- "$(cd "${PERL_LOCAL_LIBS_DIR}" || exit; select_loop $(ls -1d -- * | grep -v local-lib))"
   fi
   # shellcheck disable=SC2086
   case $1 in
@@ -47,7 +47,7 @@ perlll() {
                              * ) set -- "$1,${PERL_LOCAL_LIBS_DIR}/$2";;
                        esac;;
                   /* ) true;;
-               local ) set -- "--no-create,${PWD}/$1";; # cpm's default --local-lib-contained DIR
+      local | local/ ) set -- "--no-create,${PWD}/$1";; # cpm's default --local-lib-contained DIR
                   '' ) return;;
                    * ) set -- "${PERL_LOCAL_LIBS_DIR}/$1";;
   esac

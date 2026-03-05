@@ -57,9 +57,16 @@ This _~/customizations.sh_ example file
 
 # Change command-line editing mode from vi (the default) to emacs
 set -o emacs
+
+# Resolve distributions from https://example.com/darkpan/modules/02packages.details.txt.gz
+# and fetch them from https://example.com/darkpan/authors/id/...
+export PERL_CPM_OPT=--resolver=02packages,https://example.com/darkpan
 ```
 
-changes the command-line editing mode.
+changes the command-line editing mode and customizes the
+[cpm](https://metacpan.org/dist/App-cpm/view/script/cpm) behaviour. To
+understand the environment variable PERL_CPM_OPT, have a look at the
+implementation of the `installdeps` function in the _perl.sh_ file
 
 ## Some words about perlbrew and local::lib
 
@@ -78,3 +85,18 @@ Due to the open issue [609](https://github.com/gugod/App-perlbrew/issues/609),
 I would not recommend to use the **lib** perlbrew command as an alternative to
 the `local::lib` module.
 
+## perl-dev
+
+To simplify your perl development process, I would suggest to create an
+installation directory _perl-dev_ using `perlll` and to install the CPAN modules
+
+- [Perl::Tidy](https://metacpan.org/pod/Perl::Tidy)
+- [Perl::Critic](https://metacpan.org/pod/Perl::Critic)
+- [Test::Perl::Critic](https://metacpan.org/pod/Test::Perl::Critic)
+- [Devel::Cover](https://metacpan.org/pod/Devel::Cover)
+
+into that directory.
+
+```sh
+cpanm Perl::Tidy Perl::Critic Test::Perl::Critic Devel::Cover
+```

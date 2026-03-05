@@ -59,11 +59,13 @@ installdeps() {
   #          --no-test
   #   phase: --with-build, --with-runtime, --with-test
   #   types: --with-requires
-  # TODO: don't install "develop" phase dependencies
+  # PERL_CPM_OPT is an artficial environment variable
   if test -n "${PERL_MM_OPT}" -a "${PERL_MM_OPT##*/}" = local; then
-    cpm install --with-configure --with-develop --local-lib-contained "${PERL_MM_OPT#*=}" --show-build-log-on-failure
+    # shellcheck disable=SC2086
+    cpm install ${PERL_CPM_OPT} --with-configure --local-lib-contained "${PERL_MM_OPT#*=}" --show-build-log-on-failure
   else
-    cpm install --with-configure --with-develop --local-lib-contained local --show-build-log-on-failure
+    # shellcheck disable=SC2086
+    cpm install ${PERL_CPM_OPT} --with-configure --local-lib-contained local               --show-build-log-on-failure
   fi
 }
 

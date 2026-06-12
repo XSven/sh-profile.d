@@ -13,20 +13,17 @@ unset FORCE
 
 rm -f "${HOME}/.rpmmacros"
 
-cat > "${HOME}/.rpmmacros" <<RPMMACROS
-%_topdir        ${HOME}/rpmbuild
-# alternative _topdir macro definition
+# Alternative _topdir macro definition:
 # %_topdir        ${HOME}/src/packages
-
-%_buildrootdir  %{_tmppath}
-# alternative _buildrootdir macro definition
+# Alternative _buildrootdir macro definition:
 # %_buildrootdir  %{_topdir}/BUILDROOT
-
-%buildroot      %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
-
-%packager       ${FULL_NAME} <${EMAIL}>
-
 # %__perl         /opt/perl5/perlbrew/perls/perl-5.38.3/bin/perl
+cat > "${HOME}/.rpmmacros" <<RPMMACROS
+%_buildrootdir  %{_tmppath}
+%_dbpath        %{getenv:HOME}/rpmdb
+%_topdir        ${HOME}/rpmbuild
+%buildroot      %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
+%packager       ${FULL_NAME} <${EMAIL}>
 RPMMACROS
 
 # On purpose the _topdir directory will not be deleted automatically because it

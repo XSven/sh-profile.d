@@ -9,6 +9,8 @@
 ${FORCE:-false} || [ ! -e "${HOME}/.rpmmacros" ] || return
 unset FORCE
 
+# https://wiki.centos.org/HowTos/SetupRpmBuildEnvironment
+
 rm -f "${HOME}/.rpmmacros"
 
 cat > "${HOME}/.rpmmacros" <<RPMMACROS
@@ -23,4 +25,15 @@ cat > "${HOME}/.rpmmacros" <<RPMMACROS
 %buildroot      %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
 
 %packager       ${FULL_NAME} <${EMAIL}>
+
+# %__perl         /opt/perl5/perlbrew/perls/perl-5.38.3/bin/perl
 RPMMACROS
+
+# On purpose the _topdir directory will not be deleted automatically because it
+# might contain valuable, unsaved files.
+_topdir=$(rpm --eval '%{_topdir}')
+if [ ! -d "${_topdir}" ]; then
+  mkdir -p "${_topdir}"
+  ( cd "${_topdir}" && mkdir SOURCES SPECS BUILD SRPMS RPMS )
+fi
+unset _topdir

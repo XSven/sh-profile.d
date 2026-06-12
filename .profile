@@ -39,7 +39,7 @@ mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 
 if command_exists rpm; then
-  . ~/profile.d/rpmmacros.sh
+  . ~/profile.d/rpm-setup.sh
 fi
 
 if command_exists cvs; then
